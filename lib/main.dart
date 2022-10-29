@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //watch state here
     return MaterialApp(
       title: 'FBL Client dAPP',
       debugShowCheckedModeBanner: false,
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
         // primaryColor: Colors.blue[500],
       ),
       // darkTheme: ThemeData.dark(),
-      home: const MyHomePage(title: 'FBL Client dAPP'),
+      home: const MyHomePage(title: 'Employee Tracker'),
     );
   }
 }
@@ -51,20 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void initialization() async {
-    // This is where you can initialize the resources needed by your app while
-    // the splash screen is displayed.  Remove the following example because
-    // delaying the user experience is a bad design practice!
-    // ignore_for_file: avoid_print
     FlutterNativeSplash.remove();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF001529),
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
+      backgroundColor: Color(0xfff001529),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
