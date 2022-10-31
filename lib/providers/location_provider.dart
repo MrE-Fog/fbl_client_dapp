@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 final locationProvider = FutureProvider<Location>((ref) async {
   var currentPossion = await _determinePosition();
   print(currentPossion);
-  return Location(lat: 2343, lng: 123);
+  return Location(lat: currentPossion.latitude, lng: currentPossion.longitude);
 });
 
 /// Determine the current position of the device.
